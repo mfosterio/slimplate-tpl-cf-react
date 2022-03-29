@@ -1,0 +1,41 @@
+{
+  "name": "slimplate-tpl-cf-react",
+  "version": "0.0.0",
+  "description": "A Cloudflare Worker + React project-template for slimplate.",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx -y miniflare --live-reload --kv-persist",
+    "build": "node tools/build.mjs",
+    "deploy": "npx -y wrangler publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slimplate/slimplate-tpl-cf-react.git"
+  },
+  "keywords": [],
+  "contributors": [
+    {
+      "name": "rpgwaiter"
+    },
+    {
+      "name": "David Konsumer",
+      "email": "konsumer@jetboystudio.com",
+      "url": "http://konsumer.js.org/"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/slimplate/slimplate-tpl-cf-react/issues"
+  },
+  "homepage": "https://github.com/slimplate/slimplate-tpl-cf-react#readme",
+  "devDependencies": {
+    "esbuild": "^0.14.28",
+    "esbuild-plugin-import-glob": "^0.1.1"
+  },
+  "dependencies": {
+    "@cloudflare/kv-asset-handler": "^0.2.0",
+    "react": "^17.0.2",
+    "react-router-dom": "^6.2.2",
+    "wouter": "^2.8.0-alpha.2"
+  }
+}
