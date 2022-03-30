@@ -32,7 +32,7 @@ The idea of this project is to get up and running fast on Cloudflare Workers usi
 - The latest cloudflare features.
 - Websocket support, on cloudflare, right out of the gate.
 
-> ** DEAR DEV: ** Below here is instructions for using the generated repo. The intent is that you remove the above text, and have a nice 
+> **DEAR DEV:** Below here is instructions for using the generated repo. The intent is that you remove the above text, and have a nice README
 
 ---
 SNIP
