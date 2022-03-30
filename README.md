@@ -44,8 +44,9 @@ Here is a clear purpose-statment.
 
 [Here](https://cf-socket.konsumer.workers.dev/) is a link to this app deployed.
 
+A more complete description, here.
 
-### your first minute
+### getting started
 
 ```sh
 # project setup
