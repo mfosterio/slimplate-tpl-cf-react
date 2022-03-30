@@ -2,7 +2,7 @@ import { build } from 'esbuild'
 import pluginGlobImport from 'esbuild-plugin-import-glob'
 
 build({
-  entryPoints: ['src/worker.jsx', 'src/app.jsx'],
+  entryPoints: ['src/server.jsx', 'src/client.jsx'],
   outdir: 'public/build',
 
   plugins: [pluginGlobImport.default()],

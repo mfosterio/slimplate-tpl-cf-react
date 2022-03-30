@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npx -y miniflare --live-reload --kv-persist",
     "build": "node tools/build.mjs",
-    "deploy": "npx -y wrangler publish"
+    "deploy": "npx -y wrangler publish",
+    "test": "npx -y standard --fix && npx -y jest"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
     "@cloudflare/kv-asset-handler": "^0.2.0",
     "react": "^17.0.2",
     "react-router-dom": "^6.2.2",
+    "react-use-websocket": "^3.0.0",
     "wouter": "^2.8.0-alpha.2"
   }
 }

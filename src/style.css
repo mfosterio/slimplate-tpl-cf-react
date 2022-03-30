@@ -1,0 +1,35 @@
+/* theme system: start with light, override for dark */
+
+:root {
+  /* global vars that apply to all themes */
+  --color-brand: #3247E6;
+  --color-bg-header: var(--color-brand);
+  --color-fg-header: white;
+  
+  /* colors for light theme */
+  --color-fg-body: black;
+  --color-bg-body: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* colors for dark theme */
+    --color-fg-body: white;
+    --color-bg-body: black;
+  }
+}
+
+body {
+  color: var(--color-fg-body);
+  background-color: var(--color-bg-body);
+}
+
+body > #root > header {
+  padding: 10px 20px;
+  color: var(--color-fg-header);
+  background-color: var(--color-bg-header);
+}
+
+body > #root > main {
+  padding: 20px;
+}

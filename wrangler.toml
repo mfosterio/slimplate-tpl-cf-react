@@ -2,9 +2,10 @@ name = "cf-socket"
 type = "javascript"
 compatibility_date = "2022-03-28"
 
-account_id = "cd9c418c2f482d1d4b6616d040bd48e5"
+# put your account-id here
+account_id = ""
 
-# use workers.dev address
+# use workers.dev hostname
 workers_dev = true
 
 # set your own DNS route
@@ -16,7 +17,6 @@ zone_id = ""
 [site]
 # The directory containing your static assets
 bucket = "./public"
-entry-point = "./public/build/assets.js"
 
 [build]
 command = "npm run build"
@@ -24,4 +24,4 @@ command = "npm run build"
 [build.upload]
 format = "modules"
 dir = "public/build"
-main = "./worker.js"
+main = "./server.js"
