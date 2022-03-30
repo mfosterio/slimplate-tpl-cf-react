@@ -42,6 +42,8 @@ SNIP
 
 Here is a clear purpose-statment.
 
+[Here](https://cf-socket.konsumer.workers.dev/) is a link to this app deployed.
+
 
 ### your first minute
 

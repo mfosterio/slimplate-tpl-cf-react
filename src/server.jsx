@@ -8,6 +8,7 @@ import { getAssetFromKV } from '@cloudflare/kv-asset-handler'
 
 import html from '~/index.html'
 import App, { findRoute } from '~/app.jsx'
+import ASSET_MANIFEST from '../__STATIC_CONTENT_MANIFEST'
 
 // do all the server-side stuff for a single page
 async function getPage (route, status = 200, serverParams, props = {}) {
@@ -96,11 +97,13 @@ export default {
       return await getAssetFromKV(
         {
           request,
-          waitUntil: ctx.waitUntil
+          waitUntil (promise) {
+            return ctx.waitUntil(promise)
+          }
         },
         {
           ASSET_NAMESPACE: env.__STATIC_CONTENT,
-          ASSET_MANIFEST: env.__STATIC_CONTENT_MANIFEST
+          ASSET_MANIFEST
         }
       )
     } catch (e) {

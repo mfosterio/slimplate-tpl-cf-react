@@ -14,9 +14,15 @@ route = ""
 # Can be used to specify a domain ID when deploying to a production domain (e.g. *.mydomain.com)
 zone_id = ""
 
+kv_namespaces = [
+   { binding = "__STATIC_CONTENT", id = "810980ed84884d518bcf67a079a914b1" },
+   { binding = "__STATIC_CONTENT_MANIFEST", id = "ff05ed9b57cb41b48ef6185ab6bcb9f2" }
+]
+
 [site]
 # The directory containing your static assets
 bucket = "./public"
+entry-point = "."
 
 [build]
 command = "npm run build"
@@ -25,3 +31,8 @@ command = "npm run build"
 format = "modules"
 dir = "public"
 main = "./build/server.js"
+
+[[build.upload.rules]]
+type = "ESModule"
+globs = ["**/*.js"]
+

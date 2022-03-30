@@ -16,5 +16,8 @@ build({
   },
   inject: [
     'tools/react-shim.js'
+  ],
+  external: [
+    '../__STATIC_CONTENT_MANIFEST'
   ]
 })

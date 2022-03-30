@@ -2,11 +2,10 @@
   "name": "slimplate-tpl-cf-react",
   "version": "0.0.0",
   "description": "A Cloudflare Worker + React project-template for slimplate.",
-  "main": "index.js",
   "scripts": {
     "start": "npx -y miniflare --live-reload --kv-persist",
     "build": "node tools/build.mjs",
-    "deploy": "npx -y wrangler publish",
+    "deploy": "npx -y @cloudflare/wrangler publish",
     "test": "npx -y standard --fix && npx -y jest"
   },
   "repository": {
