@@ -1,4 +1,4 @@
-// this is the worker (server0side) entry-point
+// this is the worker (server-side) entry-point
 
 /* global WebSocketPair, Response */
 
@@ -7,14 +7,51 @@ import staticLocationHook from 'wouter/static-location'
 import { getAssetFromKV } from '@cloudflare/kv-asset-handler'
 
 import html from '~/index.html'
-import App, { routes } from '~/app.jsx'
+import App, { findRoute } from '~/app.jsx'
+
+// do all the server-side stuff for a single page
+async function getPage (route, status = 200, serverParams, props = {}) {
+  // find first path that matches
+  let currentRoute = findRoute(route)
+
+  if (currentRoute) {
+    const s = currentRoute.server ? await currentRoute.server(serverParams) : {}
+    props = { ...s.props, params: currentRoute.params }
+    status = s.status || status
+  } else {
+    currentRoute = findRoute('/404')
+    status = 404
+  }
+
+  const content = html
+    .replace('{CONTENT}', renderToString(<App routeProps={props} hook={staticLocationHook(route)} />))
+    .replace('{PAGE_DATA}', JSON.stringify(props))
+
+  return new Response(content, {
+    status,
+    headers: {
+      'content-type': 'text/html'
+    }
+  })
+}
 
 export default {
   async fetch (request, env, ctx) {
+    const serverParams = { request, env, ctx }
     const { pathname } = new URL(request.url)
 
-    // TODO: use a proper route-matcher
-    const currentRoute = routes.find(r => r?.route === pathname)
+    // they are trying to get the source of the server
+    if (pathname.startsWith('/build/server')) {
+      return getPage('/404', 404, serverParams)
+    }
+
+    let currentRoute = findRoute(pathname)
+
+    // collect props on a client-side route-change
+    if (pathname === '/_props') {
+      const u = new URL(request.url)
+      currentRoute = findRoute(request.headers.get('referer').replace(u.origin, ''))
+    }
 
     // websockets are supported
     const up = request.headers.get('upgrade')
@@ -33,46 +70,41 @@ export default {
     let props = {}
     let status = 200
 
-    // if there is a server function exported by the page, use it
+    // run server() for SSR props & client-side route-changes
     if (currentRoute?.server) {
-      const r = await currentRoute.server({ request, env, ctx })
-      if (r instanceof Response) {
-        return r
-      } else {
-        props = r.props
-        status = r.status
+      const server = await currentRoute.server(serverParams)
+      // if server() returns a Response, send it raw
+      if (server instanceof Response) {
+        return server
+      }
+      props = { ...props, ...server.props }
+      status = server.status || status
+
+      // use server-side to return server-side props
+      if (pathname === '/_props') {
+        return new Response(JSON.stringify(props), { status })
       }
     }
 
-    // TODO: let router fall through on missing: router -> public -> 404 (using react page)
-    // TODO: use a cache
-    // TODO: HMR over miniflare live-reloading
+    // if there is a component, return it
+    if (currentRoute?.default) {
+      return getPage(pathname, status, serverParams, props)
+    }
 
-    // TODO: better assets
-    if (pathname.startsWith('/build')) {
+    // handle static assets
+    try {
       return await getAssetFromKV(
         {
           request,
-          waitUntil (promise) {
-            return ctx.waitUntil(promise)
-          }
+          waitUntil: ctx.waitUntil
         },
         {
           ASSET_NAMESPACE: env.__STATIC_CONTENT,
           ASSET_MANIFEST: env.__STATIC_CONTENT_MANIFEST
         }
       )
+    } catch (e) {
+      return getPage('/404', 404, serverParams)
     }
-
-    const content = html
-      .replace('{CONTENT}', renderToString(<App routeProps={props} hook={staticLocationHook(pathname)} />))
-      .replace('{PAGE_DATA}', JSON.stringify(props))
-
-    return new Response(content, {
-      status,
-      headers: {
-        'content-type': 'text/html'
-      }
-    })
   }
 }

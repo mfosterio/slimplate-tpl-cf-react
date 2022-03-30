@@ -45,7 +45,7 @@ Here is a clear purpose-statment.
 
 ### your first minute
 
-```
+```sh
 # project setup
 git clone git@github.com:YOU/YOURS.git
 cd YOURS

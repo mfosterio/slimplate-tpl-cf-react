@@ -2,7 +2,8 @@
 
 :root {
   /* global vars that apply to all themes */
-  --color-brand: #3247E6;
+  --color-brand: #5C7CFA;
+  --color-brand-active: #364FC7;
   --color-bg-header: var(--color-brand);
   --color-fg-header: white;
   
@@ -28,8 +29,29 @@ body > #root > header {
   padding: 10px 20px;
   color: var(--color-fg-header);
   background-color: var(--color-bg-header);
+  display: flex;
+  align-items:center;
+  justify-content: space-between;
 }
 
 body > #root > main {
   padding: 20px;
+}
+
+body > #root > header > nav > *{
+  padding: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+body > #root > header > nav > *.active{
+  text-decoration: underline;
+}
+
+a, a:link, a:active, a:visited {
+  color: var(--color-brand);
+}
+
+a:hover {
+  color: var(--color-brand-active);
 }

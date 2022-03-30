@@ -57,6 +57,10 @@ export default function PageIndex ({ message }) {
 
   return (
     <>
+      <noscript>
+        <h1>Interaction stuff requires javascript enabled.</h1>
+      </noscript>
+
       <h1>HELLO!</h1>
       <hr />
 
