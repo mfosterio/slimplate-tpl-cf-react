@@ -18,6 +18,6 @@ build({
     'tools/react-shim.js'
   ],
   external: [
-    '../__STATIC_CONTENT_MANIFEST'
+    '__STATIC_CONTENT_MANIFEST'
   ]
 })

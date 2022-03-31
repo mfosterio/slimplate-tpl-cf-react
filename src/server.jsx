@@ -8,7 +8,7 @@ import { getAssetFromKV } from '@cloudflare/kv-asset-handler'
 
 import html from '~/index.html'
 import App, { findRoute } from '~/app.jsx'
-import ASSET_MANIFEST from '../__STATIC_CONTENT_MANIFEST'
+import ASSET_MANIFEST from '__STATIC_CONTENT_MANIFEST'
 
 // do all the server-side stuff for a single page
 async function getPage (route, status = 200, serverParams, props = {}) {
