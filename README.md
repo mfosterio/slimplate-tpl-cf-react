@@ -5,7 +5,7 @@ A Cloudflare Worker + React project-template for [slimplate](https://github.com/
 ## get started
 
 ```sh
-npm init slimplate myproject --react --cf
+npm init slimplate --frontend=react --backend=cfw --look=plain
 ```
 
 ## why use this?
