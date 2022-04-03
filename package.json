@@ -4,7 +4,7 @@
   "description": "A Cloudflare Worker + React project-template for slimplate.",
   "scripts": {
     "start": "npx -y miniflare --live-reload --kv-persist",
-    "build": "node tools/build.mjs && echo '{}' > public/build/__STATIC_CONTENT_MANIFEST",
+    "build": "node tools/build.mjs",
     "deploy": "npx -y @cloudflare/wrangler publish",
     "test": "npx -y standard --fix && npx -y jest"
   },
