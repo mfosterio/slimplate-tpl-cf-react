@@ -1,7 +1,7 @@
 {
-  "name": "slimplate-tpl-cf-react",
+  "name": "slimplate-project",
   "version": "0.0.0",
-  "description": "A Cloudflare Worker + React project-template for slimplate.",
+  "private": true,
   "scripts": {
     "start": "npx -y miniflare --live-reload --kv-persist",
     "build": "node tools/build.mjs",

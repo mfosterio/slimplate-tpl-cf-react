@@ -42,7 +42,7 @@ SNIP
 
 Here is a clear purpose-statment.
 
-[Here](https://cf-socket.konsumer.workers.dev/) is a link to this app deployed.
+[Here](https://slimplate-project.konsumer.workers.dev/) is a link to this app deployed.
 
 A more complete description, here.
 
@@ -50,8 +50,8 @@ A more complete description, here.
 
 ```sh
 # project setup
-git clone git@github.com:YOU/YOURS.git
-cd YOURS
+git clone git@github.com:YOU/slimplate-project.git
+cd slimplate-project
 npm i
 
 # now, go edit wrangler.toml
